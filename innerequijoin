@@ -1,0 +1,255 @@
+mysql> desc emp;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int         | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(30) | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> alter table emp
+    -> add column city varchar(30);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from emp;
++----+---------+------+
+| id | name    | city |
++----+---------+------+
+|  2 | pinky   | NULL |
+|  3 | heman   | NULL |
+|  4 | kunal   | NULL |
+|  5 | komal   | NULL |
+|  6 | tushi   | NULL |
+| 10 | sunanda | NULL |
++----+---------+------+
+6 rows in set (0.00 sec)
+
+mysql> update emp
+    -> set city='delhi'
+    -> where name='pinky';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update emp
+    -> set city='mumbai'
+    -> wher name='sunanda';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'wher name='sunanda'' at line 3
+mysql> update emp
+    -> set city='mumbai'
+    -> where name='sunanda';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update emp
+    -> set city='kolkata'
+    -> where name='tushi';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update emp
+    -> set city='chennai'
+    -> where name='komal';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update emp
+    -> set city='mulund'
+    -> where name='kunal';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update emp
+    -> set city='chembur'
+    -> where name='heman';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from emp;
++----+---------+---------+
+| id | name    | city    |
++----+---------+---------+
+|  2 | pinky   | delhi   |
+|  3 | heman   | chembur |
+|  4 | kunal   | mulund  |
+|  5 | komal   | chennai |
+|  6 | tushi   | kolkata |
+| 10 | sunanda | mumbai  |
++----+---------+---------+
+6 rows in set (0.00 sec)
+
+mysql> slect * from dep;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'slect * from dep' at line 1
+mysql> select * from dep;
++----+-------+-------+
+| id | name  | empid |
++----+-------+-------+
+|  1 | hr    |  NULL |
+|  2 | it    |     2 |
+|  3 | sales |     3 |
+|  4 | dm    |     3 |
+|  5 | hr    |     4 |
+|  6 | ml    |  NULL |
+|  7 | sp    |  NULL |
+|  8 | cs    |     5 |
++----+-------+-------+
+8 rows in set (0.00 sec)
+
+mysql> update dep
+    -> set empid=1
+    -> where name="hr';
+    "> ^C
+mysql> update dep
+    -> set empid=1
+    -> where name='hr';
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`my_db`.`dep`, CONSTRAINT `update_fk_1` FOREIGN KEY (`empid`) REFERENCES `emp` (`id`) ON UPDATE SET NULL)
+mysql> desc dep;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int         | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(30) | YES  |     | NULL    |                |
+| empid | int         | YES  | MUL | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> desc dep1;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int         | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(30) | YES  |     | NULL    |                |
+| eid   | int         | YES  | MUL | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> desc dep2;
+ERROR 1146 (42S02): Table 'my_db.dep2' doesn't exist
+mysql> create table dep2
+    -> (
+    -> did int not n ull,auto_increment primary key,
+    -> dname varchar(40),
+    -> empid int,
+    -> constraint join_fk
+    -> foreign key (empid) references emp(id)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'n ull,auto_increment primary key,
+dname varchar(40),
+empid int,
+constraint join_' at line 3
+mysql> create table dep2
+    -> (
+    -> did int not null auto_increment primary key,
+    -> dname varchar(40),
+    -> empid int,
+    -> constraint join_fk
+    -> foreign key (empid) references emp(id)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into dep2
+    ->
+    -> ^C
+mysql> alter table dep2
+    -> set did auto_increment =101;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'set did auto_increment =101' at line 2
+mysql> alter table dep2
+    -> add did auto_increment =101;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'auto_increment =101' at line 2
+mysql> alter table dep2
+    -> auto_increment =102;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into dep2(dname,empid) values('hr',2),('sales',3),('it',3),('pm',5),('cs',7);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`my_db`.`dep2`, CONSTRAINT `join_fk` FOREIGN KEY (`empid`) REFERENCES `emp` (`id`))
+mysql> insert into dep2(dname,empid) values('hr',2),('sales',3),('it',3),('pm',5),('cs',6);
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from dep2;
++-----+-------+-------+
+| did | dname | empid |
++-----+-------+-------+
+| 107 | hr    |     2 |
+| 108 | sales |     3 |
+| 109 | it    |     3 |
+| 110 | pm    |     5 |
+| 111 | cs    |     6 |
++-----+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from emp;
++----+---------+---------+
+| id | name    | city    |
++----+---------+---------+
+|  2 | pinky   | delhi   |
+|  3 | heman   | chembur |
+|  4 | kunal   | mulund  |
+|  5 | komal   | chennai |
+|  6 | tushi   | kolkata |
+| 10 | sunanda | mumbai  |
++----+---------+---------+
+6 rows in set (0.00 sec)
+
+mysql> select emp.name.dep2.dname froom emp inner join dep2
+    -> on emp.id=dep2.empid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.dname froom emp inner join dep2
+on emp.id=dep2.empid' at line 1
+mysql> select emp.name,dep2.dname from emp inner join dep2
+    -> on emp.id=dep2.empid;
++-------+-------+
+| name  | dname |
++-------+-------+
+| pinky | hr    |
+| heman | sales |
+| heman | it    |
+| komal | pm    |
+| tushi | cs    |
++-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select emp.name.dep2.dname froom emp inner join dep2
+    -> ^C
+mysql> select emp.name,dep2.dname from emp inner join dep2
+    -> on dep2.empid=emp.id;
++-------+-------+
+| name  | dname |
++-------+-------+
+| pinky | hr    |
+| heman | sales |
+| heman | it    |
+| komal | pm    |
+| tushi | cs    |
++-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select emp.name,dep2.dname from dep2 inner join empm
+    -> ^C
+mysql> select emp.name,dep2.dname from dep2 inner join emp
+    -> on dep2.empid=emp.id;
++-------+-------+
+| name  | dname |
++-------+-------+
+| pinky | hr    |
+| heman | sales |
+| heman | it    |
+| komal | pm    |
+| tushi | cs    |
++-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select emp.name,dep2.dname from dep2 inner join emp
+    -> on emp.id=dep2.empid;
++-------+-------+
+| name  | dname |
++-------+-------+
+| pinky | hr    |
+| heman | sales |
+| heman | it    |
+| komal | pm    |
+| tushi | cs    |
++-------+-------+
+5 rows in set (0.00 sec)
+
+mysql>

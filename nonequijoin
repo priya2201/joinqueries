@@ -1,0 +1,32 @@
+select emp.name,dep2.dname from dep2 inner join emp
+    -> on emp.id <> dep2.empid;
++---------+-------+
+| name    | dname |
++---------+-------+
+| pinky   | cs    |
+| pinky   | pm    |
+| pinky   | it    |
+| pinky   | sales |
+| heman   | cs    |
+| heman   | pm    |
+| heman   | hr    |
+| kunal   | cs    |
+| kunal   | pm    |
+| kunal   | it    |
+| kunal   | sales |
+| kunal   | hr    |
+| komal   | cs    |
+| komal   | it    |
+| komal   | sales |
+| komal   | hr    |
+| tushi   | pm    |
+| tushi   | it    |
+| tushi   | sales |
+| tushi   | hr    |
+| sunanda | cs    |
+| sunanda | pm    |
+| sunanda | it    |
+| sunanda | sales |
+| sunanda | hr    |
++---------+-------+
+25 rows in set (0.00 sec)

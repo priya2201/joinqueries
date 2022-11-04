@@ -1,0 +1,88 @@
+mysql> select emp.name,dep2.dname from emp natural join dep2;
++---------+-------+
+| name    | dname |
++---------+-------+
+| pinky   | cs    |
+| pinky   | pm    |
+| pinky   | it    |
+| pinky   | sales |
+| pinky   | hr    |
+| heman   | cs    |
+| heman   | pm    |
+| heman   | it    |
+| heman   | sales |
+| heman   | hr    |
+| kunal   | cs    |
+| kunal   | pm    |
+| kunal   | it    |
+| kunal   | sales |
+| kunal   | hr    |
+| komal   | cs    |
+| komal   | pm    |
+| komal   | it    |
+| komal   | sales |
+| komal   | hr    |
+| tushi   | cs    |
+| tushi   | pm    |
+| tushi   | it    |
+| tushi   | sales |
+| tushi   | hr    |
+| sunanda | cs    |
+| sunanda | pm    |
+| sunanda | it    |
+| sunanda | sales |
+| sunanda | hr    |
++---------+-------+
+30 rows in set (0.00 sec)
+
+mysql> select emp.name,dep2.dname from emp inner join dep2
+    -> on emp.id=dep2.empid;
++-------+-------+
+| name  | dname |
++-------+-------+
+| pinky | hr    |
+| heman | sales |
+| heman | it    |
+| komal | pm    |
+| tushi | cs    |
++-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select emp.name dep2.dname from emp natural join dep2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.dname from emp natural join dep2' at line 1
+mysql> select emp.name, dep2.dname from emp natural join dep2;
++---------+-------+
+| name    | dname |
++---------+-------+
+| pinky   | cs    |
+| pinky   | pm    |
+| pinky   | it    |
+| pinky   | sales |
+| pinky   | hr    |
+| heman   | cs    |
+| heman   | pm    |
+| heman   | it    |
+| heman   | sales |
+| heman   | hr    |
+| kunal   | cs    |
+| kunal   | pm    |
+| kunal   | it    |
+| kunal   | sales |
+| kunal   | hr    |
+| komal   | cs    |
+| komal   | pm    |
+| komal   | it    |
+| komal   | sales |
+| komal   | hr    |
+| tushi   | cs    |
+| tushi   | pm    |
+| tushi   | it    |
+| tushi   | sales |
+| tushi   | hr    |
+| sunanda | cs    |
+| sunanda | pm    |
+| sunanda | it    |
+| sunanda | sales |
+| sunanda | hr    |
++---------+-------+
+30 rows in set (0.00 sec)
